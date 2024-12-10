@@ -13,7 +13,6 @@ const Shop= () =>{
            <Popular></Popular>
            <Offers></Offers>
            <Newcoll></Newcoll>
-           <Newsletter></Newsletter>
         </div>
     )
 }

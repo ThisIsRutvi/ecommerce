@@ -13,6 +13,8 @@ function Loginsighnup(){
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
+    
+
     const login = async()=>{
          console.log("Login Function Executed",formData);
          let responseData;
@@ -73,10 +75,7 @@ function Loginsighnup(){
                     {state === "Sign Up" 
                       ?<p className="loginsignuup-login">Already have an acocount?<span onClick={()=>{setState("Login")}}>Login here</span></p>
                       :<p className="loginsignuup-login">Create an account?<span onClick={()=>{setState("Sign Up")}}>Click here</span></p>} 
-                    <div className="agree">
-                        <input type="checkbox" name="" id="" />
-                        <p>By contining, i agree to the terms of use and privacy policy.</p>
-                </div>
+                    
             </div>
         </div>
     )

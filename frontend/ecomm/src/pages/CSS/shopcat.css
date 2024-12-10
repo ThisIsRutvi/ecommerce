@@ -2,7 +2,8 @@
     display: block;
     align-items: center;
     margin: 30px auto;
-    width: 80%;
+    width: 500px;
+    height: 300px;
 }
 .shopcatindex{
     display: flex;
@@ -19,6 +20,7 @@
     font-weight: 500;
 }
 .shopcatprod{
+    padding-top: 20px;
     align-items: center;
     margin: 30px auto;
     display: grid;

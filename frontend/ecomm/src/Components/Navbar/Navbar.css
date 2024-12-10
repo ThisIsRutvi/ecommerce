@@ -8,7 +8,7 @@
 .nav-logo{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap:5px;
 }
 .nav-logo p{
     color: #171717;
@@ -50,14 +50,14 @@
     outline: none;
     border: 1px solid #7a7a7a;
     border-radius: 70px;
-    color: #515151;
+    color: #fefefe;
+    background-color:#eb3939 ;
     font-size: 20px;
     font-weight: 500;
-    background-color: white;
     cursor: pointer;
 }
 .nav-login-cart button:hover{
-    background:#f3f3f3 ;
+    background:#ee5d5d ;
 }
 .nav-cart-count{
     width: 22px;
@@ -65,8 +65,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -35px;
     margin-left: -35px;
+    margin-top: -42px;
     border-radius:11px;
     font-size: 14px;
     background: red;

@@ -24,6 +24,56 @@ app.get("/",(req,res)=>{
 
 // imge storage engine
 //middleware is storage and will rename that img with the new name(return cb) and that img will be stored in imgs fldr
+
+const Admin = mongoose.model('Admin',{
+    name:{
+        type:String,
+    },
+    password:{
+        type:String,
+        unique:true,
+    },
+    date:{
+        type:Date,
+        default:Date.now(),
+    },
+    loggedIn:{
+        type:Boolean,
+        default:false,
+    },
+})
+
+app.post('/adminlogin',async(req,res)=>{
+
+    const count = await Admin.countDocuments({ loggedIn:true });
+    if(count>=10){
+        return res.status(403).json({success: false,})
+    }
+    let admin = await Admin.findOne({name:req.body.username, password:req.body.password})
+    if(!admin){
+        return res.status(400).json({success:false,errors:"admin does not exsits"})
+    }
+    /*const admin = new Admin({
+        name:req.body.username,
+        password:req.body.password
+    })*/
+    if(admin.loggedIn){
+        const token = jwt.sign({admin:{id:admin.id}},'secret-ecom')
+    }
+    await admin.save();
+
+   /* const data ={
+        admin:{
+            id:admin.id
+        }
+    }*/
+
+    const token = jwt.sign({ admin: { id: admin.id } },'secret-ecom')
+    res.json({success:true,token})
+})
+
+
+
 const storage = multer.diskStorage({
     destination:'./upload/imgs',
     filename:(req,file,cb)=>{
@@ -44,6 +94,7 @@ app.post("/upload",upload.single('product'),(req,res)=>{
      })
 })
 //schema for creating products
+
 
 const Product = mongoose.model('Product',{
     id:{
@@ -78,7 +129,7 @@ const Product = mongoose.model('Product',{
         type:Boolean,
         default:true,
     }
-
+    
 })
 
 app.post("/addproduct",async (req,res)=>{
@@ -130,7 +181,7 @@ app.get('/allproducts',async(req,res)=>{
     res.send(products);
 })
 
-// shema creating for user model
+// schema creating for user model
 
 const User = mongoose.model('User',{
     name:{
@@ -157,7 +208,7 @@ const User = mongoose.model('User',{
 app.post('/signup',async(req,res)=>{
     let check = await User.findOne({email:req.body.email});
     if(check){
-        return res.status(400).json({success:false,errors:"existing user found with samne email id"})
+        return res.status(400).json({success:false,errors:"existing user found with same email id"})
     }
     let cart = {};
     for (let i = 0; i < 300; i++) {
@@ -175,12 +226,14 @@ app.post('/signup',async(req,res)=>{
     const data={//obj
         user:{
             id:user.id,
+            email:user.email
         }
     }
 
     const token = jwt.sign(data,'secret_ecom')//data will be emcrpted by one layer using salt
     res.json({success:true,token})
 })
+
 
 //creating endpoint for user login
 app.post('/login',async(req,res)=>{
@@ -190,7 +243,8 @@ app.post('/login',async(req,res)=>{
         if(passcom){
             const data ={
                 user:{
-                    id:user.id
+                    id:user.id,
+                    email:user.email
                 }
             }
             const token = jwt.sign(data,'secret_ecom');
@@ -221,22 +275,24 @@ app.get('/popularinwomen',async(req,res)=>{
     res.send(popular_in_women)
 })
 
+
+
 //creating middlewear to fetch user
 
 const fetchUser = async(req,res,next)=>{
      const token = req.header('auth-token');
      if (!token) {
-        res.status(401).send({errors:"Please authenticate using valid token"})
+        return res.status(401).send({errors:"Please authenticate using valid token"})
      }
-     else{
+    
         try {
             const data= jwt.verify(token,'secret_ecom');
             req.user = data.user;
             next();
         } catch (error) {
-            res.status(401).send({errors:"please authenticate using a valid token"})
+          return  res.status(401).send({errors:"invalid token"})
         }
-     }
+     
 }
 
 app.post('/addtocart',fetchUser,async(req,res)=>{
@@ -262,6 +318,178 @@ app.post('/getcart',fetchUser,async(req,res)=>{
     res.json(userData.cartData);
 })
 
+const Order =  mongoose.model('Order',{
+    items:[
+        {
+        name: {type:String},
+        size:{type:Number},
+        quantity:{type:Number},
+        imageUrl:{type:String},
+        price:{type:Number},
+        }
+    ],
+    totalamount:{type: Number, required:true},
+    orderDate:{type:Date,default:Date.now},
+    userEmail:{type:String,required:true},
+})
+
+app.post('/order',async (req,res)=>{
+    const {items, totalamount} = req.body;
+    try{
+        const token = req.headers['auth-token'];//Retrieves the token from the request header.
+                                                                   // Verifies and decodes it with a secret key.
+                                                                    // Extracts the user’s email so it can be used in the backend logic for actions like creating orders.
+        if (!token) return res.status(401).json({ message: 'No token provided' });
+
+        const decoded = jwt.verify(token, 'secret_ecom'); // Decode the token
+        const userEmail = decoded.user.email;
+
+        const newOrder = new Order({
+            items,
+            totalamount,
+            userEmail
+        });
+
+        await newOrder.save();
+        res.status(201).json({message:'Order placed successfully',order: newOrder});
+    }
+    catch (error)
+    {
+        console.error('Error creating order:',error);
+        res.status(500).json({message: 'order failed',error:error.message})
+    }
+})
+
+const Payment= mongoose.model('Payment',{
+    
+   pname:{
+    type:String,
+   },
+   paymentemail:{
+    type:String,
+   },
+   phoneNumber:
+   {
+    type:String,
+   },
+   address:{
+    type:String,
+    required:true
+   },
+    amount:{
+        type:Number,
+        required:true
+    },
+    date:{
+        type:Date,
+        default:Date.now()
+    }
+})
+
+app.post('/payment',async (req,res)=>{
+    const { pname, paymentemail, phoneNumber, address, amount } = req.body;
+
+    try{
+    const user = await User.findOne({ email: paymentemail });
+    
+    // Check if the user exists and emails match
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+       
+       const newPayment = new Payment ({
+        pname,
+        paymentemail,
+        phoneNumber,
+        address,
+        amount
+       });
+
+       await newPayment.save();
+
+
+       res.status(201).json({message:'Payment confirmed',payment:newPayment})
+    }
+    catch (error){
+        console.error('Error processing payment:', error);
+       res.status(500).json({message: 'payment failed',error:error.message})
+    }
+})
+
+const Feedback = mongoose.model('Feedback',{
+    femail:{
+        type:String,
+        required:true,
+    },
+    feedback:{
+        type:String
+    }
+})
+
+app.post('/feedback',async(req,res)=>{
+    const {femail,feedback} = req.body
+    try{
+        
+
+        const newFeedback = new Feedback({
+            femail,
+            feedback
+        });
+
+        await newFeedback.save();
+        res.status(201).json({message:'feedback is confirmed',feedback:newFeedback})
+
+    }
+    catch(error){
+        console.error('Error processing feedback:', error);
+        res.status(500).json({message: 'feedback failed',error:error.message})
+    }
+})
+
+app.get('/feedbacklist',async(req,res) =>{
+    try{
+       const feedback = await Feedback.find();
+
+       res.json({success:true , feedback});
+    }
+    catch(error){
+       res.status(500).json({success:false,message: 'fail to fetch feedback',error:error.message});
+    }
+})
+
+app.get('/userlist', async (req, res) => {
+    try {
+        // Fetch all users from the database, select only name, email, and password
+        const users = await User.find();
+        
+        // Respond with the list of users
+        res.json({ success: true, users });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to fetch users', error: error.message });
+    }
+});
+
+app.get('/orderlist',async (req,res)=>{
+    try{
+        const orders = await Order.find();
+
+        res.json({success:true,orders})
+    }
+    catch (error){
+        res.status(500).json({success:false,message:'failed',error:error.message});
+    }
+})
+
+app.get('/paymentlist',async (req,res) =>{
+    try{
+        const pay = await Payment.find();
+
+        res.json({success:true, pay});
+    }catch (error){
+        res.status(500).json({success:false, message:'failed to fetch payment info',error:error.message});
+    }
+})
 app.listen(port,(error)=>{
     if(!error){
       console.log("server "+port)  

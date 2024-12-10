@@ -1,23 +1,17 @@
 import React, { useContext } from "react";
 import './CSS/shopcat.css'
 import { Shopcontext } from "../context/Shopcontext";
-import drop_icon from '../Components/Assets/dropdown_icon.png';
 import Items from '../Components/items/items.jsx'
+import banner1 from '../Components/Assets/banner1.png'
+
 
 function Shopcategory(props){
 
     const {all_product} = useContext(Shopcontext);
     return(
         <div className="shopcat">
-            <img className="shopcat_banner" src={props.banner} alt="" />
-            <div className="shopcatindex">
-                <p>
-                    <span>Showing 1-12 </span>out of 36 products
-                </p>
-                <div className="shopcatsort">
-                    sort by<img sec={drop_icon}></img>
-                </div>
-            </div>
+            <img className="shopcat_banner" src={banner1} alt="" />
+            
             <div className="shopcatprod">
                 {all_product.map((item,i)=>{
                     if(props.category === item.category){
@@ -28,9 +22,7 @@ function Shopcategory(props){
                     }
                 })}
             </div>
-              <div className="shopcat-load">
-                Explore More
-              </div>
+              
         </div>
     )
 }

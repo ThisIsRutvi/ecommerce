@@ -5,19 +5,25 @@
     gap: 20px;
     width: 100%;
     max-width: 250px;
-    height: 100vh;
+    height: 125vh;
     background: white;
+    padding-right: 3px;
+    padding-left: 3px;
 }
 .sidebar-item{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0px 20px;
-    padding: 5px 10px;
+    margin: 0px 5px;
+    padding: 5px 5px;
     border-radius:6px;
-    background:  #f6f6f6;
-    gap: 20px;
+    background:  #d8d7d7;
+    gap: 10px;
     cursor: pointer;
+}
+.sidebar img{
+    width: 35px;
+    height: 35px;
 }
 @media(max-width:800px){
     .sidebar{

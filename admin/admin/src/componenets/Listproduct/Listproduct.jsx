@@ -33,13 +33,12 @@ function Listproduct(){
             <div className="listproduct">
                  <h1>All Product's List</h1>
                  <div className="listproduct-format-main">
-                  <p>Product</p>
-                  <p>Title</p>
-                  <p>Old Price</p>
-                  <p>New Price</p>
-                  <p>Category</p>
-                  <p>Remove</p>
-
+                  <p className='lip'>Product</p>
+                  <p className='lip'>Title</p>
+                  <p className='lip'>Old Price</p>
+                  <p className='lip'>New Price</p>
+                  <p className='lip'>Category</p>
+                  <p className='lip'>Remove</p>
                  </div>
                  <div className="listproduct-allproduct">{/*map the product data that we will fetch using Api*/}
                     <hr />
@@ -47,9 +46,9 @@ function Listproduct(){
                     return <><div key={index} className="listproduct-format-main listproduct-format">
                       <img src={product.image} alt="" className="listproduct-product-icon" />
                       <p>{product.name}</p>
-                      <p>${product.old_price}</p>
-                      <p>${product.new_price}</p>
-                      <p>{product.category}</p>
+                      <p className='pil'>₹{product.old_price}</p>
+                      <p className='pil'>₹{product.new_price}</p>
+                      <p className='pil'>{product.category}</p>
                       <img onClick={()=>{remove_product(product.id)}}src={cross_icon} alt="" className="listproduct-remove-icon" />
                     </div>
                     <hr></hr>

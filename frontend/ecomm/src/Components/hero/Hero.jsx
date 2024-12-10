@@ -3,6 +3,7 @@ import './Hero.css';
 import hand_icon from'../Assets/hand_icon.png';
 import arrow_icon from '../Assets/arrow.png';
 import hero from '../Assets/hero_image.png'
+//import hero from '../Assets/heroi1.png'
 
 function Hero(){
     return(

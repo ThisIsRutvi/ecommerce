@@ -1,11 +1,11 @@
 import React,{useContext, useState,useRef} from "react";
 import './Navbar.css'
-
-import logo from '../Assets/logo.png'
 import carticon from '../Assets/cart_icon.png'
 import { Link } from "react-router-dom";
 import { Shopcontext } from "../../context/Shopcontext";
 import nav_dropdown from '../Assets/free-dropdown.png';
+import shoelogo from '../Assets/shoelog.jpeg'
+
 
 function Navbar(){ 
 
@@ -21,12 +21,12 @@ function Navbar(){
     return(
         <div className="navbar">
             <div className="nav-logo">
-                <img src={logo} alt=""></img>
-                <p>SHOPPER</p>
+                <img src={shoelogo} alt=""></img>
+                <p>URBANSOLE</p>
             </div>
             <img className="nav-dropdown" onClick={dropdown_toggle}src={nav_dropdown} alt="" />
             <ul ref={menuRef} className="navmenu">
-               <li onClick={()=>{setMenu("shop")}}><Link style={{textDecoration:"none"}}to='/'>Shop</Link>{menu ==="shop"?<hr/>:<></>}</li>                                <img src="Assets\exclusive_image.png"></img>
+               <li onClick={()=>{setMenu("shop")}}><Link style={{textDecoration:"none"}}to='/'>Shop</Link>{menu ==="shop"?<hr/>:<></>}</li>            
                 <li onClick={()=>{setMenu("mens")}}><Link style={{textDecoration:"none"}}to='/mens'>Men</Link>{menu ==="mens"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("womens")}}><Link style={{textDecoration:"none"}}to='/womens'>Women</Link>{menu ==="womens"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("kids")}}><Link style={{textDecoration:"none"}}to='/kids'>Kids</Link>{menu ==="kids"?<hr/>:<></>}</li>
