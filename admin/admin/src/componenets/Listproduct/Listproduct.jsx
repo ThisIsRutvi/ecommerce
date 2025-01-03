@@ -7,15 +7,15 @@ function Listproduct(){
     const [allproducts,setAllProducts] = useState([])
 
     const fetchInfo = async()=>{
-      await fetch('http://localhost:4000/allproducts')//getting the response
-      .then((res)=>res.json())//converted it using json
-      .then((data)=>{setAllProducts(data)});//save the data in set variable
+      await fetch('http://localhost:4000/allproducts')
+      .then((res)=>res.json())
+      .then((data)=>{setAllProducts(data)});
     }
 
-    //we have run this fetchinfo func whnever this component(allprod) mounted
+    
     useEffect(()=>{
       fetchInfo();
-    },[])//execute only once
+    },[])
 
     const remove_product = async(id)=>{
        await fetch('http://localhost:4000/removeproduct',{
@@ -40,7 +40,7 @@ function Listproduct(){
                   <p className='lip'>Category</p>
                   <p className='lip'>Remove</p>
                  </div>
-                 <div className="listproduct-allproduct">{/*map the product data that we will fetch using Api*/}
+                 <div className="listproduct-allproduct">
                     <hr />
                    {allproducts.map((product,index)=>{
                     return <><div key={index} className="listproduct-format-main listproduct-format">
