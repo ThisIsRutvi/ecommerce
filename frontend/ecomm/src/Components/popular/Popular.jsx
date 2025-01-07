@@ -10,10 +10,7 @@ function Popular(){
       fetch('http://localhost:4000/popularinwomen')
       .then((response)=>response.json())
       .then((data)=>setPopularProducts(data));
-    },[])
-
-    //creating endpoint for adding data
-    
+    },[])    
 
     return(
         <div className="Popular">
