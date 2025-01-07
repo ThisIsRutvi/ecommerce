@@ -13,7 +13,7 @@ function OrderList() {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
-                        'auth-token': localStorage.getItem('auth-token')  // Assuming auth-token is stored in localStorage
+                        'auth-token': localStorage.getItem('auth-token')  
                     }
                 });
                 const data = await response.json();
