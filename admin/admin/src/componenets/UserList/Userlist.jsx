@@ -5,8 +5,7 @@ const Userlist = () => {
 
     const [users, setUsers] = useState([]);
     const [error, setError] = useState('');
-
-    // Fetch the users from the backend on component mount
+    
     useEffect(() => {
         fetchUsers();
     }, []);
@@ -17,7 +16,6 @@ const Userlist = () => {
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
-                    // You might need to send a token here for admin access
                 }
             });
             const contentType = response.headers.get('content-type');
@@ -32,7 +30,7 @@ const Userlist = () => {
             }
             
             } else {
-                const errorText = await response.text(); // Read the error response as text
+                const errorText = await response.text(); 
             console.error('Error Response:', errorText);
             setError(`Failed to fetch users. Server responded with: ${errorText}`);
             }
