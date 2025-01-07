@@ -13,8 +13,6 @@ function Loginsighnup(){
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
-    
-
     const login = async()=>{
          console.log("Login Function Executed",formData);
          let responseData;
@@ -28,11 +26,9 @@ function Loginsighnup(){
         }).then((response)=>response.json()).then((data)=>responseData=data)
     
 
-    if(responseData.success){//localStorage is a web storage API provided by browsers that allows you to store key-value pairs in a web browser with no expiration time. The stored data will persist even after the browser is closed and reopened.
-        localStorage.setItem('auth-token',responseData.token);//
-        window.location.replace("/");                             // setItem is a method of localStorage used to store a key-value pair.
-                                               //'auth-token' is the key under which the value will be stored. In this case, it is an authentication token.
-                                               //responseData.token is the value being stored. It is assumed to be a token received from the server, typically used for authenticating subsequent requests.
+    if(responseData.success){
+        localStorage.setItem('auth-token',responseData.token);
+        window.location.replace("/");                             
     }
     else{
         alert(responseData.errors)
@@ -52,11 +48,9 @@ function Loginsighnup(){
         }).then((response)=>response.json()).then((data)=>responseData=data)
     
 
-    if(responseData.success){//localStorage is a web storage API provided by browsers that allows you to store key-value pairs in a web browser with no expiration time. The stored data will persist even after the browser is closed and reopened.
-        localStorage.setItem('auth-token',responseData.token);//
-        window.location.replace("/");                             // setItem is a method of localStorage used to store a key-value pair.
-                                               //'auth-token' is the key under which the value will be stored. In this case, it is an authentication token.
-                                               //responseData.token is the value being stored. It is assumed to be a token received from the server, typically used for authenticating subsequent requests.
+    if(responseData.success){
+        localStorage.setItem('auth-token',responseData.token);
+        window.location.replace("/");                            
     }
     else{
         alert(responseData.errors)
