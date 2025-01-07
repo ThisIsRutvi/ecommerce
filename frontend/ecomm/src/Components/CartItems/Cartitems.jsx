@@ -114,12 +114,6 @@ function Cartitems(){
                 <button onClick={buyNow} >Place Order</button> 
               
             </div>
-            {/*<div className="cartitems-promocode">
-                <p>if you have a promo code,enter it here</p>
-                <div className="cartitems-promobox">
-                    <input type="text" placeholder="promo code"></input>
-                    <button>Submit</button>
-                </div>*/}
                   
             </div>
         </div>
