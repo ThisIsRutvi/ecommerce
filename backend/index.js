@@ -4,26 +4,19 @@ const app = express();
 const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 const multer = require("multer");
-const path = require("path")//access to our backend directory in our express app
+const path = require("path")
 const cors = require("cors");
 const { type } = require("os");
 
-app.use(express.json());//whatever request we will get from response that will be automatically passed through json//for api to run on server
-app.use(cors());//it will connect our react project to express app on 4000port
+app.use(express.json());
+app.use(cors());
 
-//database connection with mongodb
 mongoose.connect("mongodb+srv://rutvidave:rutvi%40dave03@cluster0.iygot2o.mongodb.net/e-commerce")
-
-//rutvi@dave03
-
-// Api creation
 
 app.get("/",(req,res)=>{
    res.send("express app is running")
 })
 
-// imge storage engine
-//middleware is storage and will rename that img with the new name(return cb) and that img will be stored in imgs fldr
 
 const Admin = mongoose.model('Admin',{
     name:{
@@ -53,20 +46,10 @@ app.post('/adminlogin',async(req,res)=>{
     if(!admin){
         return res.status(400).json({success:false,errors:"admin does not exsits"})
     }
-    /*const admin = new Admin({
-        name:req.body.username,
-        password:req.body.password
-    })*/
     if(admin.loggedIn){
         const token = jwt.sign({admin:{id:admin.id}},'secret-ecom')
     }
     await admin.save();
-
-   /* const data ={
-        admin:{
-            id:admin.id
-        }
-    }*/
 
     const token = jwt.sign({ admin: { id: admin.id } },'secret-ecom')
     res.json({success:true,token})
@@ -83,18 +66,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage:storage})
 
-//upload enpoint
 
-app.use('/imgs',express.static('upload/imgs'))//uploaded imgs will get stored in imgs folder that will get at/imgs//endpoint
+app.use('/imgs',express.static('upload/imgs'))
 
 app.post("/upload",upload.single('product'),(req,res)=>{
      res.json({
-        success:1,//if img uploaded succesfully
-        img_url:`http://localhost:${port}/imgs/${req.file.filename}`//file is a property added to the req object by multer middleware. It represents the uploaded file.filename is a property of the file object created by multer. It contains the name of the file as stored on the server.
+        success:1,
+        img_url:`http://localhost:${port}/imgs/${req.file.filename}`
      })
 })
-//schema for creating products
-
 
 const Product = mongoose.model('Product',{
     id:{
@@ -135,12 +115,12 @@ const Product = mongoose.model('Product',{
 app.post("/addproduct",async (req,res)=>{
     let products = await Product.find({});
     let id;
-    if(products.length>0){//When you have a products array and you want to add a new product//in database
-       let last_product_array =  products.slice(-1);//returns a new array containing only the last element of products.
-       let last_product = last_product_array[0];//To access the actual last product object from the new array created by slice(-1).
-       id=last_product.id+1;//To generate a new unique id for a new product.
+    if(products.length>0){
+       let last_product_array =  products.slice(-1);
+       let last_product = last_product_array[0]
+       id=last_product.id+1;
     }
-    else{//when databse hase no producat
+    else{
        id=1;
     }
     const product = new Product({
@@ -160,10 +140,8 @@ app.post("/addproduct",async (req,res)=>{
     })
 })
 
-//api for deleting products
-
 app.post('/removeproduct',async(req,res)=>{
-    await Product.findOneAndDelete({            //mongoose method
+    await Product.findOneAndDelete({           
          id:req.body.id
     })
     console.log('removed');
@@ -173,15 +151,11 @@ app.post('/removeproduct',async(req,res)=>{
     })
 })
 
-//creating api for getting all produts
-
 app.get('/allproducts',async(req,res)=>{
     let products = await Product.find({});
     console.log("all produts fetch");
     res.send(products);
 })
-
-// schema creating for user model
 
 const User = mongoose.model('User',{
     name:{
@@ -204,7 +178,6 @@ const User = mongoose.model('User',{
     
 })
 
-// creating endpoint for registering the user
 app.post('/signup',async(req,res)=>{
     let check = await User.findOne({email:req.body.email});
     if(check){
@@ -221,21 +194,19 @@ app.post('/signup',async(req,res)=>{
         cartData:cart
     })
 
-    await user.save();//save in db
+    await user.save();
 
-    const data={//obj
+    const data={
         user:{
             id:user.id,
             email:user.email
         }
     }
 
-    const token = jwt.sign(data,'secret_ecom')//data will be emcrpted by one layer using salt
+    const token = jwt.sign(data,'secret_ecom')
     res.json({success:true,token})
 })
 
-
-//creating endpoint for user login
 app.post('/login',async(req,res)=>{
     let user = await User.findOne({email:req.body.email});
     if(user){
@@ -259,7 +230,6 @@ app.post('/login',async(req,res)=>{
     }
 })
 
-// creating endpint for newcollection data
 app.get('/newcollection',async(req,res)=>{
     let products = await Product.find({});
     let newcollection = products.slice(1).slice(-8);
@@ -267,17 +237,12 @@ app.get('/newcollection',async(req,res)=>{
     res.send(newcollection);
 })
 
-//creating and ponit for popular in women
 app.get('/popularinwomen',async(req,res)=>{
     let products = await Product.find({category:"women"});
     let popular_in_women = products.slice(0,4);
     console.log("Popular in women fetched");
     res.send(popular_in_women)
 })
-
-
-
-//creating middlewear to fetch user
 
 const fetchUser = async(req,res,next)=>{
      const token = req.header('auth-token');
@@ -292,8 +257,7 @@ const fetchUser = async(req,res,next)=>{
         } catch (error) {
           return  res.status(401).send({errors:"invalid token"})
         }
-     
-}
+     }
 
 app.post('/addtocart',fetchUser,async(req,res)=>{
     console.log("added",req.body.itemId)
@@ -336,12 +300,10 @@ const Order =  mongoose.model('Order',{
 app.post('/order',async (req,res)=>{
     const {items, totalamount} = req.body;
     try{
-        const token = req.headers['auth-token'];//Retrieves the token from the request header.
-                                                                   // Verifies and decodes it with a secret key.
-                                                                    // Extracts the user’s email so it can be used in the backend logic for actions like creating orders.
+        const token = req.headers['auth-token'];
         if (!token) return res.status(401).json({ message: 'No token provided' });
 
-        const decoded = jwt.verify(token, 'secret_ecom'); // Decode the token
+        const decoded = jwt.verify(token, 'secret_ecom'); 
         const userEmail = decoded.user.email;
 
         const newOrder = new Order({
@@ -392,7 +354,6 @@ app.post('/payment',async (req,res)=>{
     try{
     const user = await User.findOne({ email: paymentemail });
     
-    // Check if the user exists and emails match
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -460,11 +421,8 @@ app.get('/feedbacklist',async(req,res) =>{
 
 app.get('/userlist', async (req, res) => {
     try {
-        // Fetch all users from the database, select only name, email, and password
         const users = await User.find();
-        
-        // Respond with the list of users
-        res.json({ success: true, users });
+                res.json({ success: true, users });
     } catch (error) {
         res.status(500).json({ success: false, message: 'Failed to fetch users', error: error.message });
     }
