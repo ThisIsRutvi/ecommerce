@@ -25,22 +25,20 @@ function Addproduct(){
         let responseData;
         let product = productDetails;
 
-        let formData = new FormData();//FormData object, which provides a way to easily construct a set of key/value pairs representing form fields and their values, which can then be easily sent using the fetch API, XMLHttpRequest, or other networking methods.
-        formData.append('product',image);// formData.append('product', image); is used to add a file (in this case, an image) to a FormData object under the key 'product'. This form data can then be sent to a server using a method like fetch to handle file uploads. This is useful in scenarios where you need to submit forms that include files, such as image uploads in an e-commerce application.
-
+        let formData = new FormData();
+        formData.append('product',image);
         await fetch('http://localhost:4000/upload',{
             method:'POST',
             headers:{
                 Accept:'application/json',
             },
             body:formData,
-        }).then((resp)=> resp.json()).then((data)=>{responseData=data})//promise//parse data
+        }).then((resp)=> resp.json()).then((data)=>{responseData=data})
    
-        // if it success img has been saved in the multer img storage and we will get the url
         if(responseData.success){
-            product.image = responseData.img_url;//get through backend
+            product.image = responseData.img_url;
             console.log(product);
-            await fetch('http://localhost:4000/addproduct',{//add product endpoint
+            await fetch('http://localhost:4000/addproduct',{
                 method:'POST',
                 headers:{
                     Accept:'application/json',
