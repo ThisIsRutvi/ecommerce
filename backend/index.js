@@ -14,16 +14,12 @@ app.use(cors());//it will connect our react project to express app on 4000port
 //database connection with mongodb
 mongoose.connect("mongodb+srv://rutvidave:rutvi%40dave03@cluster0.iygot2o.mongodb.net/e-commerce")
 
-//rutvi@dave03
-
 // Api creation
 
 app.get("/",(req,res)=>{
    res.send("express app is running")
 })
 
-// imge storage engine
-//middleware is storage and will rename that img with the new name(return cb) and that img will be stored in imgs fldr
 
 const Admin = mongoose.model('Admin',{
     name:{
@@ -72,7 +68,8 @@ app.post('/adminlogin',async(req,res)=>{
     res.json({success:true,token})
 })
 
-
+// imge storage engine
+//middleware is storage and will rename that img with the new name(return cb) and that img will be stored in imgs fldr
 
 const storage = multer.diskStorage({
     destination:'./upload/imgs',
@@ -160,10 +157,8 @@ app.post("/addproduct",async (req,res)=>{
     })
 })
 
-//api for deleting products
-
 app.post('/removeproduct',async(req,res)=>{
-    await Product.findOneAndDelete({            //mongoose method
+    await Product.findOneAndDelete({            
          id:req.body.id
     })
     console.log('removed');
@@ -173,7 +168,6 @@ app.post('/removeproduct',async(req,res)=>{
     })
 })
 
-//creating api for getting all produts
 
 app.get('/allproducts',async(req,res)=>{
     let products = await Product.find({});
@@ -262,7 +256,7 @@ app.post('/login',async(req,res)=>{
 // creating endpint for newcollection data
 app.get('/newcollection',async(req,res)=>{
     let products = await Product.find({});
-    let newcollection = products.slice(1).slice(-8);
+    let newcollection = products.slice(-8);
     console.log("fetched");
     res.send(newcollection);
 })
@@ -430,8 +424,6 @@ const Feedback = mongoose.model('Feedback',{
 app.post('/feedback',async(req,res)=>{
     const {femail,feedback} = req.body
     try{
-        
-
         const newFeedback = new Feedback({
             femail,
             feedback
@@ -492,7 +484,7 @@ app.get('/paymentlist',async (req,res) =>{
 })
 app.listen(port,(error)=>{
     if(!error){
-      console.log("server "+port)  
+      console.log("server runing on"+port)  
     }
     else{
         console.log("error :" +error)

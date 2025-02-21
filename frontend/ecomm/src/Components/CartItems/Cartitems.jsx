@@ -54,12 +54,8 @@ function Cartitems(){
         catch(error){
             console.error('Error:', error);
             alert('An error occurred while placing your order');
-        }
-        
-    
+        }    
 }
-
-
     return(
         <div className="caritems">
            <div className="cartitems-format-main">
@@ -114,13 +110,7 @@ function Cartitems(){
                 <button onClick={buyNow} >Place Order</button> 
               
             </div>
-            {/*<div className="cartitems-promocode">
-                <p>if you have a promo code,enter it here</p>
-                <div className="cartitems-promobox">
-                    <input type="text" placeholder="promo code"></input>
-                    <button>Submit</button>
-                </div>*/}
-                  
+                       
             </div>
         </div>
         

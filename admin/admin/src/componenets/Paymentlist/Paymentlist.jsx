@@ -51,12 +51,12 @@ const Paymentlist = () => {
             <tbody>
                     {pay.length > 0 ? (
                         pay.map((pay) => (
-                            <tr key={pay.paymentemail}>
-                                <td className='ptd'>{pay.pname}</td>
-                                <td className='ptd'>{pay.paymentemail}</td>
-                                <td className='ptd'>{pay.phoneNumber}</td>
-                                <td className='ptd'>{pay.address}</td>
-                                <td className='ptd'>{pay.amount}</td>
+                            <tr className='ptr' key={pay.paymentemail}>
+                                <td >{pay.pname}</td>
+                                <td >{pay.paymentemail}</td>
+                                <td >{pay.phoneNumber}</td>
+                                <td >{pay.address}</td>
+                                <td >{pay.amount}</td>
                             </tr>
                         ))
                     ) : (

@@ -12,10 +12,10 @@ function Listproduct(){
       .then((data)=>{setAllProducts(data)});//save the data in set variable
     }
 
-    //we have run this fetchinfo func whnever this component(allprod) mounted
+    
     useEffect(()=>{
       fetchInfo();
-    },[])//execute only once
+    },[])
 
     const remove_product = async(id)=>{
        await fetch('http://localhost:4000/removeproduct',{

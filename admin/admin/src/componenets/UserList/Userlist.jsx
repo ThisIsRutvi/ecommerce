@@ -58,10 +58,10 @@ const Userlist = () => {
                 <tbody>
                     {users.length > 0 ? (
                         users.map((user) => (
-                            <tr  key={user.email}>
-                                <td className='uthd'>{user.name}</td>
-                                <td className='uthd'>{user.email}</td>
-                                <td className='uthd'>{user.password}</td>
+                            <tr className='uthd'  key={user.email}>
+                                <td >{user.name}</td>
+                                <td >{user.email}</td>
+                                <td >{user.password}</td>
                             </tr>
                         ))
                     ) : (

@@ -11,17 +11,17 @@ import Return from './Components/Footer/Return.jsx';
 import About from './Components/Footer/About.jsx';
 import Contact from './Components/Footer/Contact.jsx';
 import Exchange from './Components/Footer/Exchange.jsx';
-import Payment from './Components/pymentUtil/Payment.jsx';
-import Dontshow from './dontshow/Dontshow.jsx';
+import Payment from './Components/payment/Payment.jsx';
+import Hide from './hide/Hide.jsx';
 
 function App() {
   return (
     <>
       <div>
         <BrowserRouter>
-        <Dontshow>
+        <Hide>
           <Navbar></Navbar>
-          </Dontshow>
+          </Hide>
           <Routes>
             <Route path='/' element={<Shop/>} />
             <Route path='/mens' element={<Shopcategory  category="men" />} />
@@ -38,9 +38,9 @@ function App() {
             <Route path='/exchange' element={<Exchange></Exchange>}></Route>
             <Route path='/payment' element={<Payment></Payment>}></Route>
           </Routes>
-          <Dontshow>
+          <Hide>
           <Footer></Footer>
-          </Dontshow>
+          </Hide>
         </BrowserRouter>
       </div>
     </>

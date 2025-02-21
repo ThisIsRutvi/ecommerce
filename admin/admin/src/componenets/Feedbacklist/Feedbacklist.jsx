@@ -10,7 +10,7 @@ const Feedbacklist = () => {
 
     useEffect(()=>{
        fetchfeed();
-    })
+    },[])
 
     const fetchfeed = async () =>{
         try{

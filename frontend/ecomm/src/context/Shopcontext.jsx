@@ -96,9 +96,7 @@ const ShopcontextProvider = (props) =>{
         }
         return totalItem;
     }
-
-    
-
+ 
     const contval ={getTotalcartItems,getTotalcartAmount,all_product,cartItems,addToCart,removefromCart};
 
     return(

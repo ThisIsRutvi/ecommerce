@@ -13,8 +13,6 @@ function Loginsighnup(){
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
-    
-
     const login = async()=>{
          console.log("Login Function Executed",formData);
          let responseData;
@@ -40,6 +38,7 @@ function Loginsighnup(){
     }
 
     const signup = async()=>{
+        
         console.log("Signup Function Executed",formData)
         let responseData;
         await fetch('http://localhost:4000/signup',{
@@ -51,7 +50,6 @@ function Loginsighnup(){
             body:JSON.stringify(formData), 
         }).then((response)=>response.json()).then((data)=>responseData=data)
     
-
     if(responseData.success){//localStorage is a web storage API provided by browsers that allows you to store key-value pairs in a web browser with no expiration time. The stored data will persist even after the browser is closed and reopened.
         localStorage.setItem('auth-token',responseData.token);//
         window.location.replace("/");                             // setItem is a method of localStorage used to store a key-value pair.

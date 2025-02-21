@@ -13,12 +13,11 @@
     padding: 10px;
     font-size: 20px;
 }
-.uthd{
-    padding: 15px;
-    padding-left: 117px;
-    padding-right: 117px;
+.uthd td{
+    padding: 13px;
+    padding-left: 88px;
+    padding-right: 88px;
     overflow :auto;
-
 }
 h1{
    

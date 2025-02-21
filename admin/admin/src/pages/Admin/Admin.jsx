@@ -21,18 +21,15 @@ const isAuthenticated = () => {
   return localStorage.getItem("auth-token"); // Check if token exists
 };
 
-
-
   return(
     <div className="admin">
       <Dontshow>
       <Sidebar></Sidebar>
       </Dontshow>
 
-
       <Routes>
         <Route path="/adminlogin" element={<Login></Login>}></Route>
-        <Route path='/addproduct' element={isAuthenticated()?<Addproduct></Addproduct>:<Navigate to="/adminlogin"></Navigate>}></Route>
+        <Route path='/addproduct' element={<Addproduct></Addproduct>}></Route>
         <Route path='/listproduct' element={<Listproduct> </Listproduct>}></Route>
         <Route path="*" element={<Navigate to="/adminlogin" />} />
         <Route path='/userlist' element={isAuthenticated()?<Userlist></Userlist>:<Navigate to='/adminlogin'></Navigate>}></Route>
@@ -40,8 +37,7 @@ const isAuthenticated = () => {
         <Route path="/paymentlist" element={<Paymentlist></Paymentlist>}></Route>
         <Route path="/feedbacklist" element={<Feedbacklist></Feedbacklist>}></Route>
       </Routes>
-
-      
+ 
     </div>
   )
 }

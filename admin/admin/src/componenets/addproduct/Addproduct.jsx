@@ -33,7 +33,7 @@ function Addproduct(){
             headers:{
                 Accept:'application/json',
             },
-            body:formData,
+            body:formData, 
         }).then((resp)=> resp.json()).then((data)=>{responseData=data})//promise//parse data
    
         // if it success img has been saved in the multer img storage and we will get the url

@@ -29,11 +29,9 @@ const Login = () => {
     if(responseData.success){
       localStorage.setItem('auth-token',responseData.token)
       window.location.replace("/userlist");
-
     }
     else{
-      alert(responseData.errors);
-      
+      alert(responseData.errors);  
     }
   }
 

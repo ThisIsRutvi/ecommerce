@@ -49,9 +49,6 @@ const Payment = (props) => {
      }
   }
 
-
-
-   
   return (
     <div>
         <div className='paycon'>
