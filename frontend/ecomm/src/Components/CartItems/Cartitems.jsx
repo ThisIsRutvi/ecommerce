@@ -110,7 +110,11 @@ function Cartitems(){
                 <button onClick={buyNow} >Place Order</button> 
               
             </div>
+<<<<<<< HEAD
                        
+=======
+                  
+>>>>>>> 9f2ac68eeb2e96cae2627e63a47ee74e74e7e08f
             </div>
         </div>
         

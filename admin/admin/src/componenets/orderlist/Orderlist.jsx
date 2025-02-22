@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Orderlist.css';  // Assuming you want to style the list
+import './Orderlist.css'; 
 
 function OrderList() {
     const [orders, setOrders] = useState([]);
@@ -13,7 +13,7 @@ function OrderList() {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
-                        'auth-token': localStorage.getItem('auth-token')  // Assuming auth-token is stored in localStorage
+                        'auth-token': localStorage.getItem('auth-token')  
                     }
                 });
                 const data = await response.json();

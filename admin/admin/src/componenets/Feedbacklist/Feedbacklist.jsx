@@ -45,7 +45,7 @@ const Feedbacklist = () => {
      
 
     </div>
-    <div className="listfeedback">{/*map the product data that we will fetch using Api*/}
+    <div className="listfeedback">
        <hr />
       {Feedback.map((feedback)=>{
        return <><div className='feedback-format-main feedback-format'>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import './Newcoll.css'
-//import new_collection from '../Assets/new_collections';
 import Items from "../items/items";
 
 function Newcoll(){

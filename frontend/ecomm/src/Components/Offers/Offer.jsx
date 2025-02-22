@@ -1,8 +1,5 @@
 import React from "react";
 import './Offer.css'
-//import exclu from '../Assets/exclusive_image.png'
-//import exclu from '../Assets/heroi1.png'
-//import exclu from '../Assets/exclu.png'
 import exclu from '../Assets/excluu.png'
 
 function Offers(){
