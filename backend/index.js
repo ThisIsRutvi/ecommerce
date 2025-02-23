@@ -13,11 +13,7 @@ app.use(cors());
 
 mongoose.connect("mongodb+srv://rutvidave:rutvi%40dave03@cluster0.iygot2o.mongodb.net/e-commerce")
 
-<<<<<<< HEAD
-// Api creation
 
-=======
->>>>>>> 9f2ac68eeb2e96cae2627e63a47ee74e74e7e08f
 app.get("/",(req,res)=>{
    res.send("express app is running")
 })
@@ -147,11 +143,8 @@ app.post("/addproduct",async (req,res)=>{
 })
 
 app.post('/removeproduct',async(req,res)=>{
-<<<<<<< HEAD
+
     await Product.findOneAndDelete({            
-=======
-    await Product.findOneAndDelete({           
->>>>>>> 9f2ac68eeb2e96cae2627e63a47ee74e74e7e08f
          id:req.body.id
     })
     console.log('removed');
@@ -161,10 +154,7 @@ app.post('/removeproduct',async(req,res)=>{
     })
 })
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 9f2ac68eeb2e96cae2627e63a47ee74e74e7e08f
 app.get('/allproducts',async(req,res)=>{
     let products = await Product.find({});
     console.log("all produts fetch");
