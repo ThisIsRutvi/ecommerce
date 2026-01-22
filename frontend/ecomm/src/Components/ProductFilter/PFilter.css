@@ -1,0 +1,53 @@
+.filtermain{
+    display: flex;
+    flex-direction: column;
+}
+.filter h4{
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.category label{
+    font-size: 18px;
+}
+.category input{
+    height: 15px;
+    width: 15px;
+}
+.category h4{
+    font-size: 17px;
+    padding-bottom: 10px;
+}
+.cat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.price{
+    padding-top: 20px;
+}
+.price h4{
+    font-size: 18px; 
+    padding-bottom: 10px;
+}
+.apply{
+    padding-top: 15px;
+}
+.apply .apply-btn{
+    background-color:#eb3939 ;
+    color: white;
+    border:none;
+    height: 50px;
+    width: 120px;
+    font-size: 17px;
+    border-radius: 30px;
+}
+.apply .apply-btn:hover{
+    background:#ee5d5d ;
+}

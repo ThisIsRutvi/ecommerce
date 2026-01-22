@@ -5,7 +5,7 @@ import Login from "./pages/Login/Login";
 import Sidebar from "./componenets/sidebar/Sidebar";
 import Addproduct from "./componenets/addproduct/Addproduct.jsx";
 import Listproduct from "./componenets/Listproduct/Listproduct.jsx";
-import Dontshow from "./componenets/Don't/Dontshow.jsx";
+import Hide from "./componenets/Hide/Hide.jsx";
 
 function App(){
 
@@ -13,9 +13,9 @@ function App(){
   return(
     <div>
      
-      <Dontshow>
+      <Hide>
        <Navbar></Navbar>
-       </Dontshow>
+       </Hide>
       
       <Admin></Admin>
       

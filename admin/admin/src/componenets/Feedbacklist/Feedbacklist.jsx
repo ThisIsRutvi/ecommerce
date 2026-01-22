@@ -8,10 +8,6 @@ const Feedbacklist = () => {
     const [Feedback,setFeedback] = useState([]);
     const [error,setError] = useState(false);
 
-    useEffect(()=>{
-       fetchfeed();
-    },[])
-
     const fetchfeed = async () =>{
         try{
             const response = await fetch('http://localhost:4000/feedbacklist',{
@@ -34,12 +30,16 @@ const Feedbacklist = () => {
             setError('Error fetching user data: ' + error.message);
           }
     }
+    useEffect(()=>{
+      fetchfeed();
+   },[])
 
   return (
     
     <div className="feedback">
     <h1>Feedback List</h1>
-    <div className="feedback-format-main">
+    <div className="feedback-format-main ">
+      
      <p className='fp'>Email</p>
      <p className='fp'>Feedback</p>
      

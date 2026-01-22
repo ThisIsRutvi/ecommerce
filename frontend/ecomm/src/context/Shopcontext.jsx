@@ -16,6 +16,11 @@ const ShopcontextProvider = (props) =>{
     const[all_product,setAll_product] = useState([]);
 
     const[cartItems,setCartItems] = useState(getdefaultcart());
+    const [priceRanage,setPriceRanage] = useState([0,5000])
+    const [category,setCategory] = useState([])
+
+    const [isFilter,setIsFilter] = useState(false)
+    const [applyFilter,setApplyFilter] = useState(false)
 
     useEffect(()=>{
         fetch('http://localhost:4000/allproducts')
@@ -74,7 +79,6 @@ const ShopcontextProvider = (props) =>{
 
     const getTotalcartAmount =()=>{
         let totalAmount =0;
-        let size = 0;
         for(const item in cartItems){
             if(cartItems[item]>0){
                 let itemInfo = all_product.find((product)=>product.id===parseInt(item));
@@ -96,8 +100,9 @@ const ShopcontextProvider = (props) =>{
         }
         return totalItem;
     }
- 
-    const contval ={getTotalcartItems,getTotalcartAmount,all_product,cartItems,addToCart,removefromCart};
+
+
+    const contval ={getTotalcartItems,getTotalcartAmount,all_product,cartItems,addToCart,removefromCart,priceRanage,setPriceRanage,category,setCategory,isFilter,setIsFilter,applyFilter,setApplyFilter};
 
     return(
         <Shopcontext.Provider value={contval}>

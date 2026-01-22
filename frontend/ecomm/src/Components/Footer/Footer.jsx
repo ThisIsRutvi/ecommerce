@@ -7,9 +7,6 @@ import pintrest from '../Assets/pintester_icon.png'
 import whatsapp from '../Assets/whatsapp_icon.png'
 import Return from "./Return.jsx";
 import './Return.css'
-    
-        
-
 import {Link} from "react-router-dom"
 
 function Footer(){
@@ -54,7 +51,7 @@ function Footer(){
            </div>
            <div className="footercopy">
             <hr/>
-            <p>Copyright @2023 - All Right Reserved</p>
+            <p>Copyright @2024 - All Right Reserved</p>
            </div>
         </div>
     )

@@ -1,18 +1,21 @@
-.navbar{
+ .navbar{
     display: flex;
     justify-content:space-around;
-    padding: 16px;
     box-shadow: 0 1px 3px -2px black;
     align-items: center;
-}
+} 
+.nav-logo img{
+        width: 80px;
+        height: 80px;
+    }
 .nav-logo{
     display: flex;
     align-items: center;
-    gap:5px;
+    gap:10px;
 }
 .nav-logo p{
     color: #171717;
-    font-size: 38px;
+    font-size: 30px;
     font-weight: 600;
 }
 .navmenu{
@@ -44,7 +47,7 @@
     align-items: center;
     gap: 40px;
 }
-.nav-login-cart button{
+.nav-login-cart .login{
     width: 155px;
     height: 58px;
     outline: none;
@@ -75,6 +78,20 @@
 .nav-dropdown{
     display: none;
 }
+.filter-btn {
+ background-color: transparent;
+ border: none;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ font-size: 15px;
+}
+.filter-img{
+    height: 40px;
+    width: 40px; 
+}
+
+
 @media(max-width:1280px){
     .navbar{
         padding: 12px 50px;

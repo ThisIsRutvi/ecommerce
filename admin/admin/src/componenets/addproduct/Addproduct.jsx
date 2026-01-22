@@ -32,14 +32,10 @@ function Addproduct(){
             headers:{
                 Accept:'application/json',
             },
-<<<<<<< HEAD
-            body:formData, 
-        }).then((resp)=> resp.json()).then((data)=>{responseData=data})//promise//parse data
-=======
+
             body:formData,
         }).then((resp)=> resp.json()).then((data)=>{responseData=data})
->>>>>>> 9f2ac68eeb2e96cae2627e63a47ee74e74e7e08f
-   
+ 
         if(responseData.success){
             product.image = responseData.img_url;
             console.log(product);

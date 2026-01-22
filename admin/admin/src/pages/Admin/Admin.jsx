@@ -4,18 +4,15 @@ import Sidebar from "../../componenets/sidebar/Sidebar.jsx";
 import Addproduct from "../../componenets/addproduct/Addproduct.jsx";
 import Listproduct from "../../componenets/Listproduct/Listproduct.jsx";
 import Navbar from "../../componenets/Navbar/Navbar.jsx";
-import Dontshow from "../../componenets/Don't/Dontshow.jsx";
 import Login from "../Login/Login.jsx";
 import { Routes,Route , BrowserRouter, Navigate } from "react-router-dom";
 import Userlist from "../../componenets/UserList/Userlist.jsx";
 import Paymentlist from "../../componenets/Paymentlist/Paymentlist.jsx";
 import Feedbacklist from "../../componenets/Feedbacklist/Feedbacklist.jsx";
 import OrderList from "../../componenets/orderlist/Orderlist.jsx";
-
+import Hide from "../../componenets/Hide/Hide.jsx"
 
 function Admin(){
-
-  
 
 const isAuthenticated = () => {
   return localStorage.getItem("auth-token"); // Check if token exists
@@ -23,9 +20,9 @@ const isAuthenticated = () => {
 
   return(
     <div className="admin">
-      <Dontshow>
+     <Hide>
       <Sidebar></Sidebar>
-      </Dontshow>
+      </Hide>
 
       <Routes>
         <Route path="/adminlogin" element={<Login></Login>}></Route>

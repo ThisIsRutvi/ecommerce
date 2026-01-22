@@ -6,13 +6,16 @@ const jwt = require("jsonwebtoken")
 const multer = require("multer");
 const path = require("path")
 const cors = require("cors");
-const { type } = require("os");
+const { OAuth2Client } = require("google-auth-library");
+const dotenv = require('dotenv');
 
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://rutvidave:rutvi%40dave03@cluster0.iygot2o.mongodb.net/e-commerce")
+dotenv.config()
+const client  = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
+mongoose.connect("mongodb+srv://rutvidave:rutvi%40dave03@cluster0.iygot2o.mongodb.net/e-commerce")
 
 app.get("/",(req,res)=>{
    res.send("express app is running")
@@ -56,9 +59,6 @@ app.post('/adminlogin',async(req,res)=>{
     res.json({success:true,token})
 })
 
-// imge storage engine
-//middleware is storage and will rename that img with the new name(return cb) and that img will be stored in imgs fldr
-
 const storage = multer.diskStorage({
     destination:'./upload/imgs',
     filename:(req,file,cb)=>{
@@ -67,7 +67,6 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage:storage})
-
 
 app.use('/imgs',express.static('upload/imgs'))
 
@@ -171,6 +170,19 @@ const User = mongoose.model('User',{
     },
     password:{
         type:String,
+        required:function(){
+            return this.authProvider === "local"
+        }
+    },
+    googleId:{
+        type:String,
+        unique:true,
+        sparse:true
+    },
+    authProvider:{
+        type:String,
+        enum:["local","google","local+google"],
+        required:true
     },
     cartData:{
         type:Object,
@@ -234,6 +246,73 @@ app.post('/login',async(req,res)=>{
     }
 })
 
+app.post('/google',async(req,res)=>{
+    try{
+    const {token} = req.body
+
+    const ticket = await client.verifyIdToken({
+        idToken:token,
+        audience:process.env.GOOGLE_CLIENT_ID
+    })
+
+    const payload = ticket.getPayload()
+    const {sub,email,name} = payload
+
+    if(!sub){
+        return res.status(401).json({message:'invalid google id'})
+    }
+      let user = await User.findOne({email})
+
+    if(user ){
+
+       if(!user.googleId){
+       user.googleId = sub;
+       user.authProvider = user.authProvider === 'local'
+       ?"local+google":"google";
+       await user.save()
+       }
+    }
+    else {
+  const cart = {};
+  for (let i = 0; i < 300; i++) cart[i] = 0;
+
+  user = await User.create({
+    name,
+    email,
+    googleId: sub,
+    authProvider: "google",
+    password: null,
+    cartData: cart
+  });
+ }
+
+ const jwttoken = jwt.sign(
+  {
+    user: {
+      id: user._id,
+      email: user.email
+    }
+  },
+  'secret_ecom',
+  { expiresIn: '7d' }
+);
+
+    res.json({
+        success:true,
+        token:jwttoken,
+         user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        authProvider: user.authProvider,
+        },
+    })
+}catch(error){
+console.error(error);
+    res.status(401).json({ error: "Google authentication failed" });
+}
+})
+
 app.get('/newcollection',async(req,res)=>{
     let products = await Product.find({});
     let newcollection = products.slice(-8);
@@ -248,20 +327,30 @@ app.get('/popularinwomen',async(req,res)=>{
     res.send(popular_in_women)
 })
 
-const fetchUser = async(req,res,next)=>{
-     const token = req.header('auth-token');
-     if (!token) {
-        return res.status(401).send({errors:"Please authenticate using valid token"})
-     }
-    
-        try {
-            const data= jwt.verify(token,'secret_ecom');
-            req.user = data.user;
-            next();
-        } catch (error) {
-          return  res.status(401).send({errors:"invalid token"})
-        }
-     }
+const fetchUser = (req, res, next) => {
+  const token = req.header("auth-token");
+
+  if (!token) {
+    return res.status(401).json({ error: "Auth token missing" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, "secret_ecom");
+
+    if (!decoded.user || !decoded.user.id) {
+      return res.status(401).json({ error: "Invalid token payload" });
+    }
+
+    req.user = {
+      id: decoded.user.id,
+      email: decoded.user.email
+    };
+
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Invalid or expired token" });
+  }
+};
 
 app.post('/addtocart',fetchUser,async(req,res)=>{
     console.log("added",req.body.itemId)
@@ -280,11 +369,17 @@ app.post('/removefromcart',fetchUser,async(req,res)=>{
     res.send("removed")
 })
 
-app.post('/getcart',fetchUser,async(req,res)=>{
-    console.log("getcart")
-    let userData = await User.findOne({_id:req.user.id})
-    res.json(userData.cartData);
-})
+app.post('/getcart', fetchUser, async (req, res) => {
+  console.log("getcart");
+
+  const userData = await User.findById(req.user.id);
+
+  if (!userData) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  res.json(userData.cartData);
+});
 
 const Order =  mongoose.model('Order',{
     items:[
@@ -361,7 +456,6 @@ app.post('/payment',async (req,res)=>{
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-
        
        const newPayment = new Payment ({
         pname,
@@ -450,6 +544,49 @@ app.get('/paymentlist',async (req,res) =>{
         res.status(500).json({success:false, message:'failed to fetch payment info',error:error.message});
     }
 })
+
+app.get('/filterproduct',async(req,res)=>{
+    try {
+        const {category,minprice,maxprice} = req.query
+        const filter ={}
+
+   if (category && category.trim() !== '') {
+  const categories = category.split(',').map(c => c.trim().toLowerCase());
+  filter.category = { $in: categories };
+}
+
+        if(minprice || maxprice ){
+
+            filter.new_price={}
+
+            if(minprice) filter.new_price.$gte = Number(minprice)
+            if(maxprice) filter.new_price.$lte = Number(maxprice)    
+        }
+
+        const products = await Product.find(filter)
+        res.json(products)
+    } catch (error) {
+        res.status(500).json({success:false,message:'failed to search product',error:error.message})
+    }
+})
+
+app.get('/search',async(req,res)=>{
+    try {
+        const {name} = req.query
+        const filter ={}
+
+        if(name){
+            filter.name={$regex :name,$options:'i'}
+        }
+
+        const products = await Product.find(filter)
+        res.json(products)
+    } catch (error) {
+        res.status(500).json({success:false,message:'failed to search product',error:error.message})
+    }
+})
+
+
 app.listen(port,(error)=>{
     if(!error){
       console.log("server runing on"+port)  

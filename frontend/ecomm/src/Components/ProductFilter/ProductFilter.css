@@ -1,0 +1,36 @@
+.filter-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* LEFT FILTER */
+.filter-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  border-right: 1px solid #ddd;
+  padding-right: 16px;
+}
+
+/* RIGHT PRODUCTS */
+.product-area {
+  flex: 1;
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .filter-layout {
+    flex-direction: column;
+  }
+
+  .filter-sidebar {
+    display: none; /* drawer handles this */
+  }
+}

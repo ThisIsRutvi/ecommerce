@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import './loginsin.css'
+  import axios from 'axios'
+import { GoogleLogin } from '@react-oauth/google'
+
 function Loginsighnup(){
 
     const [state,setState] = useState("Login");
@@ -48,23 +51,29 @@ function Loginsighnup(){
             body:JSON.stringify(formData), 
         }).then((response)=>response.json()).then((data)=>responseData=data)
     
-<<<<<<< HEAD
-    if(responseData.success){//localStorage is a web storage API provided by browsers that allows you to store key-value pairs in a web browser with no expiration time. The stored data will persist even after the browser is closed and reopened.
-        localStorage.setItem('auth-token',responseData.token);//
-        window.location.replace("/");                             // setItem is a method of localStorage used to store a key-value pair.
-                                               //'auth-token' is the key under which the value will be stored. In this case, it is an authentication token.
-                                               //responseData.token is the value being stored. It is assumed to be a token received from the server, typically used for authenticating subsequent requests.
-=======
+
 
     if(responseData.success){
         localStorage.setItem('auth-token',responseData.token);
         window.location.replace("/");                            
->>>>>>> 9f2ac68eeb2e96cae2627e63a47ee74e74e7e08f
     }
     else{
         alert(responseData.errors)
     }
     }
+
+
+const Googlelogin =async(cred)=>{
+        const res = await axios.post('http://localhost:4000/google',{
+                  token: cred.credential
+        })
+    
+    if(res.data.success){
+        localStorage.setItem("auth-token",res.data.token)
+        window.location.replace("/");                            
+    }
+}
+
     return(
         <div className="loginsignup">
             <div className="loginsignup-container">
@@ -75,6 +84,16 @@ function Loginsighnup(){
                     <input name='password' value={formData.password} onChange={chnghandler} type="password" placeholder="password"/>
                     </div>
                     <button onClick={()=>{state === "Login"?login():signup()}}>Continue</button>
+
+         <div           
+         className='googlelogin'>
+        <GoogleLogin
+          onSuccess={Googlelogin}
+          onError={() => alert("Google Login Failed")}
+          text={state==='Login'?"signin_with":"signup_with"}
+            size="large"     
+        />
+            </div>           
                     {state === "Sign Up" 
                       ?<p className="loginsignuup-login">Already have an acocount?<span onClick={()=>{setState("Login")}}>Login here</span></p>
                       :<p className="loginsignuup-login">Create an account?<span onClick={()=>{setState("Sign Up")}}>Click here</span></p>} 

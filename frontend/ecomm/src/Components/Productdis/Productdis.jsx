@@ -3,12 +3,10 @@ import './Productdis.css';
 import star from "../Assets/star_icon.png";
 import stardull from "../Assets/star_dull_icon.png";
 import { Shopcontext } from "../../context/Shopcontext";
-//import { useLocation } from 'react-router-dom'; // Import useLocation from react-router-dom
 import { useState } from "react";
 
-
-
 function Productdis(props){
+
     const {product} = props;
     const {addToCart} = useContext(Shopcontext);
 
@@ -18,10 +16,10 @@ function Productdis(props){
       kid:['1','2','3','4','5']
       };  
 
-    const [selectedSize, setSelectedSize] = useState(null); // To store selected size
+    const [selectedSize, setSelectedSize] = useState(null); 
 
     const handleSizeClick = (size) => {
-      setSelectedSize(size); // Set the clicked size as selected
+      setSelectedSize(size); 
       console.log("Selected size:", size);
     };
 

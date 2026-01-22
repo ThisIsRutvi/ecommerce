@@ -4,6 +4,8 @@ import hand_icon from'../Assets/hand_icon.png';
 import arrow_icon from '../Assets/arrow.png';
 import hero from '../Assets/hero_image.png'
 //import hero from '../Assets/heroi1.png'
+import { Link } from "react-router-dom";
+
 
 function Hero(){
     return(
@@ -19,8 +21,10 @@ function Hero(){
                 <p>for everyone</p>
             </div>
             <div className="herobtn">
+                    <Link to="/newcollection" style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center", gap: "5px" }}>
                 <div>latest collection</div>
                 <img src={arrow_icon} alt=""></img>
+                </Link>
             </div>
            </div>
            <div className="heroright">

@@ -13,6 +13,12 @@ import Contact from './Components/Footer/Contact.jsx';
 import Exchange from './Components/Footer/Exchange.jsx';
 import Payment from './Components/payment/Payment.jsx';
 import Hide from './hide/Hide.jsx';
+import Newcoll from './Components/Newcollection/Newcoll.jsx';
+import ProductFilter from './Components/ProductFilter/ProductFilter.jsx';
+import Search from './Components/Search/Search.jsx';
+import FilterProvider from './context/FilterContext.jsx';
+import ProductGrid from './Components/ProductFilter/ProductGrid.jsx';
+import FilterProduct from './pages/FilterProduct.jsx';
 
 function App() {
   return (
@@ -24,6 +30,7 @@ function App() {
           </Hide>
           <Routes>
             <Route path='/' element={<Shop/>} />
+            <Route path="/newcollection" element={<Newcoll />} />
             <Route path='/mens' element={<Shopcategory  category="men" />} />
             <Route path='/womens' element={<Shopcategory category="women" />} />
             <Route path='/kids' element={<Shopcategory category="kid" />} />
@@ -37,6 +44,7 @@ function App() {
             <Route path='/contact' element={<Contact></Contact>}></Route>
             <Route path='/exchange' element={<Exchange></Exchange>}></Route>
             <Route path='/payment' element={<Payment></Payment>}></Route>
+            <Route path="/filter" element={<FilterProduct />} />
           </Routes>
           <Hide>
           <Footer></Footer>

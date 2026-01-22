@@ -47,10 +47,10 @@ const Userlist = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <table className='utb' border="1">
                 <thead className='thed'>
-                    <tr >
-                        <th className='uth'>Name</th>
-                        <th className='uth'>Email</th>
-                        <th className='uth'>Password</th>
+                    <tr className='uth' >
+                        <th >Name</th>
+                        <th >Email</th>
+                        <th >Password</th>
                     </tr>
                 </thead>
                 <tbody>
