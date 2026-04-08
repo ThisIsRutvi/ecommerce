@@ -1,8 +1,6 @@
 import axios from "axios"
 import { useEffect, useState ,useContext} from "react"
 import Items from "../items/items"
-import FilterProvider from "../../context/FilterContext";
-import { FilterContext } from "../../context/FilterContext";
 import { Shopcontext } from "../../context/Shopcontext";
 import './ProductGrid.css'
 

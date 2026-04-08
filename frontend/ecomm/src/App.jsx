@@ -14,10 +14,9 @@ import Exchange from './Components/Footer/Exchange.jsx';
 import Payment from './Components/payment/Payment.jsx';
 import Hide from './hide/Hide.jsx';
 import Newcoll from './Components/Newcollection/Newcoll.jsx';
-import ProductFilter from './Components/ProductFilter/ProductFilter.jsx';
-import Search from './Components/Search/Search.jsx';
-import FilterProvider from './context/FilterContext.jsx';
-import ProductGrid from './Components/ProductFilter/ProductGrid.jsx';
+// import ProductFilter from './Components/ProductFilter/ProductFilter.jsx';
+// import Search from './Components/Search/Search.jsx';
+// import ProductGrid from './Components/ProductFilter/ProductGrid.jsx';
 import FilterProduct from './pages/FilterProduct.jsx';
 
 function App() {

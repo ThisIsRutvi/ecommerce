@@ -1,6 +1,5 @@
 import { useContext, useState } from "react"
 import Slider from '@mui/material/Slider';
-import FilterProvider from "../../context/FilterContext";
 import { Shopcontext } from "../../context/Shopcontext";
 import './PFilter.css'
 
