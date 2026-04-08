@@ -79,21 +79,40 @@
     align-items: center;
     justify-content: center;
 } */
- .productdis-right-sizes .size {
-    width: 50px;                  /* rectangle width */
-    height: 40px;                 /* rectangle height */
-    margin: 5px;
-    background-color: #eb3939;    /* orange-red color */
+ 
+
+.productdis-right-sizes {
+    display: flex;
+    flex-direction: row;   /* 👈 horizontal */
+    gap: 12px;
+    margin: 15px 0;
+    flex-wrap: nowrap;       /* 👈 responsive */
+}
+
+.productdis-right-sizes .size {
+    width: 50px;
+    height: 40px;
+    background-color: #eb3939;
     color: white;
-    display: flex;                /* enables flexbox centering */
-    align-items: center;          /* centers vertically */
-    justify-content: center;      /* centers horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    transition: 0.3s ease;
+    border: none;
+    transition: 0.2s ease;
 }
+
+.productdis-right-sizes .size:hover {
+    background-color: #c92f2f;
+}
+
+.productdis-right-sizes .size.active {
+    background-color: #000;
+}
+
 
 .productdis p{
     font-weight: 500;

@@ -53,19 +53,18 @@ function Productdis(props){
                </div>
                <div className="productdis-right-size">
                
-                <div className="productdis-right-sizes">               
+          <div className="productdis-right-sizes">
+  {sizes[product.category].map((size) => (
+    <button
+      className={`size ${selectedSize === size ? "active" : ""}`}
+      key={size}
+      onClick={() => handleSizeClick(size)}
+    >
+      {size}
+    </button>
+  ))}
+</div>
 
-{sizes[product.category].map((size) => (
-                            <button 
-                                className="size" 
-                                key={size} 
-                                onClick={() => handleSizeClick(size)}
-                            >
-                                {size}
-                            </button>
-                        ))}
-                   
-                  </div> 
                </div>
                {selectedSize && (
         <div>
