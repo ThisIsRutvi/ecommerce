@@ -1,0 +1,48 @@
+{
+  "topic": "about_urbansole",
+  "intents": [
+    {
+      "intent": "about_brand",
+      "keywords": [
+        "about urbansole",
+        "what is urbansole",
+        "tell me about your company",
+        "who are you",
+        "about your brand"
+      ],
+      "response": "UrbanSole is a footwear brand that believes shoes are more than just something you wear—they are a statement of who you are. We focus on providing footwear that balances comfort, performance, and style."
+    },
+    {
+      "intent": "mission",
+      "keywords": [
+        "your mission",
+        "what is your goal",
+        "company mission",
+        "what do you aim for",
+        "purpose of urbansole"
+      ],
+      "response": "Our mission is to create high-quality, stylish, and comfortable footwear that fits seamlessly into everyday life. Every step, from design to final product, is driven by craftsmanship and attention to detail."
+    },
+    {
+      "intent": "quality",
+      "keywords": [
+        "quality of shoes",
+        "are your shoes durable",
+        "materials used",
+        "how good is your product",
+        "do your shoes last long"
+      ],
+      "response": "We focus heavily on quality. UrbanSole uses premium materials, sustainable fabrics, and advanced sole technology. Our shoes are crafted to ensure durability, comfort, and long-lasting performance."
+    },
+    {
+      "intent": "why_choose_us",
+      "keywords": [
+        "why choose urbansole",
+        "what makes you different",
+        "why should i buy from you",
+        "what is special about your brand"
+      ],
+      "response": "UrbanSole stands out by combining style, comfort, and durability. We pay attention to every detail—from material selection to craftsmanship—to ensure you get footwear that looks good and feels even better."
+    }
+  ]
+}

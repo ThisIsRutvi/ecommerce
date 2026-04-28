@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+.sole-shell * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sole-shell {
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f4f0;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 620px;
+  display: flex;
+  flex-direction: column;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Header ── */
+.sole-header {
+  background: #fff;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sole-brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sole-brand-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  letter-spacing: -0.2px;
+  line-height: 1;
+}
+
+.sole-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.sole-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.sole-status-text {
+  font-size: 11px;
+  color: #888;
+  font-weight: 400;
+}
+
+/* ── Messages ── */
+.sole-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+
+.sole-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sole-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sole-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.sole-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  animation: soleFadeUp 0.25s ease;
+}
+
+.sole-row.user {
+  flex-direction: row-reverse;
+}
+
+@keyframes soleFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* ── Avatars ── */
+.sole-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sole-avatar.user {
+  background: #f0efeb;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+/* ── Bubbles ── */
+.sole-bubble {
+  max-width: 72%;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  border-radius: 14px;
+}
+
+.sole-bubble.bot {
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  border-bottom-left-radius: 4px;
+}
+
+.sole-bubble.user {
+  background: #1a1a1a;
+  color: #f5f5f5;
+  border-bottom-right-radius: 4px;
+}
+
+/* ── Typing indicator ── */
+.sole-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 14px;
+}
+
+.sole-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #aaa;
+  display: inline-block;
+  animation: bounce 1.1s infinite;
+}
+
+.sole-typing span:nth-child(2) { animation-delay: 0.18s; }
+.sole-typing span:nth-child(3) { animation-delay: 0.36s; }
+
+/* ── Quick chips ── */
+.sole-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 12px;
+  flex-shrink: 0;
+}
+
+.sole-chip {
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.sole-chip:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #1a1a1a;
+  background: #f5f4f0;
+}
+
+/* ── Input bar ── */
+.sole-inputbar {
+  background: #fff;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.sole-input {
+  flex: 1;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f4f0;
+  color: #1a1a1a;
+  outline: none;
+  height: 38px;
+  line-height: 20px;
+  transition: border-color 0.15s;
+}
+
+.sole-input::placeholder {
+  color: #aaa;
+}
+
+.sole-input:focus {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.sole-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Send button ── */
+.sole-send {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #1a1a1a;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.sole-send:hover {
+  opacity: 0.82;
+}
+
+.sole-send:active {
+  transform: scale(0.95);
+}
+
+.sole-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

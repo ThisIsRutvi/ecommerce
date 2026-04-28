@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -15,6 +16,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.1",
     "google-auth-library": "^10.5.0",
+    "groq-sdk": "^1.1.2",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",

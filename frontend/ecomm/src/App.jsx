@@ -18,6 +18,8 @@ import Newcoll from './Components/Newcollection/Newcoll.jsx';
 // import Search from './Components/Search/Search.jsx';
 // import ProductGrid from './Components/ProductFilter/ProductGrid.jsx';
 import FilterProduct from './pages/FilterProduct.jsx';
+import Chatbot from './chatbot/Chatbot.jsx';
+import Floatingbot from './chatbot/Floatingbot.jsx';
 
 function App() {
   return (
@@ -44,11 +46,13 @@ function App() {
             <Route path='/exchange' element={<Exchange></Exchange>}></Route>
             <Route path='/payment' element={<Payment></Payment>}></Route>
             <Route path="/filter" element={<FilterProduct />} />
+            <Route path="/chatbot" element={<Chatbot></Chatbot>} />
           </Routes>
           <Hide>
           <Footer></Footer>
           </Hide>
         </BrowserRouter>
+        <Floatingbot></Floatingbot>
       </div>
     </>
   );
