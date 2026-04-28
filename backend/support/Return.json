@@ -1,0 +1,62 @@
+{
+  "topic": "return_policy",
+  "intents": [
+    {
+      "intent": "return_time",
+      "keywords": [
+        "return days",
+        "how many days to return",
+        "return period",
+        "when can i return",
+        "return window"
+      ],
+      "response": "You can return an item within 7 days from the date of delivery."
+    },
+    {
+      "intent": "return_conditions",
+      "keywords": [
+        "return conditions",
+        "what is required for return",
+        "how to be eligible for return",
+        "return requirements",
+        "conditions for return"
+      ],
+      "response": "To be eligible for a return, the item must be unused, in the same condition as received, and in its original packaging. A receipt or proof of purchase is also required."
+    },
+    {
+  "intent": "non_returnable",
+  "keywords": [
+    "what items cannot be returned",
+    "non returnable items",
+    "non returnable",
+    "which items are not eligible for return",
+    "can i return used shoes",
+    "customized order return",
+    "return exceptions",
+    "items not eligible for return"
+  ],
+  "response": "The following items are non-returnable and not eligible for returns: (1) Used or worn products — items must be unused and in original condition. (2) Customized or personalized orders — any shoes made or modified as per special request cannot be returned. If you are unsure whether your item qualifies for a return, please contact our support team."
+},
+    {
+      "intent": "refund_process",
+      "keywords": [
+        "how refund works",
+        "refund process",
+        "when will i get refund",
+        "refund time",
+        "how long refund takes"
+      ],
+      "response": "Once we receive your returned item, we inspect it and notify you. If approved, the refund is initiated to your original payment method within 5–7 days. Additional time may be required by your bank or card provider."
+    },
+    {
+      "intent": "return_confirmation",
+      "keywords": [
+        "will i be notified after return",
+        "return status",
+        "do you confirm return",
+        "what happens after return"
+      ],
+      "response": "After receiving your returned item, we will inspect it and notify you about the approval or rejection of your refund."
+    }
+  ]
+}

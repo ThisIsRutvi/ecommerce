@@ -1,0 +1,60 @@
+{
+  "topic": "exchange_policy",
+  "intents": [
+    {
+      "intent": "general_exchange",
+      "keywords": [
+        "exchange",
+        "exchange policy",
+        "can i exchange",
+        "do you allow exchange",
+        "how does exchange work"
+      ],
+      "response": "UrbanSole offers a flexible exchange policy to help you get the perfect fit. You can request an exchange for a different size, color, or style based on availability."
+    },
+    {
+      "intent": "exchange_eligibility",
+      "keywords": [
+        "exchange eligibility",
+        "conditions for exchange",
+        "requirements for exchange",
+        "how to exchange item",
+        "rules for exchange"
+      ],
+      "response": "To be eligible for exchange, the item must be unused, in its original condition, and in the original packaging, including the shoe box. The request must be made within 7 days of delivery."
+    },
+    {
+      "intent": "exchange_time_limit",
+      "keywords": [
+        "exchange days",
+        "time limit for exchange",
+        "within how many days exchange",
+        "exchange period",
+        "last date for exchange"
+      ],
+      "response": "Exchange requests must be made within 7 days of receiving your order."
+    },
+    {
+      "intent": "non_exchangeable_items",
+      "keywords": [
+        "non exchange items",
+        "what cannot be exchanged",
+        "final sale exchange",
+        "clearance exchange",
+        "custom shoes exchange"
+      ],
+      "response": "Items marked as final sale or clearance, as well as personalized or customized shoes, cannot be exchanged."
+    },
+    {
+      "intent": "exchange_options",
+      "keywords": [
+        "change size",
+        "change color",
+        "change style",
+        "exchange options",
+        "what can i exchange for"
+      ],
+      "response": "You can exchange your product for a different size, color, or style, depending on availability."
+    }
+  ]
+}

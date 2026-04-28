@@ -1,13 +1,15 @@
+import express from "express";
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import multer from "multer";
+import path from "path";
+import cors from "cors";
+import { OAuth2Client } from "google-auth-library";
+import dotenv from 'dotenv';
+import router from "./chatbot/chatRoutes.js";
+
 const port = 4000;
-const express = require("express")
 const app = express();
-const mongoose = require("mongoose")
-const jwt = require("jsonwebtoken")
-const multer = require("multer");
-const path = require("path")
-const cors = require("cors");
-const { OAuth2Client } = require("google-auth-library");
-const dotenv = require('dotenv');
 
 app.use(express.json());
 app.use(cors());
@@ -21,6 +23,7 @@ app.get("/",(req,res)=>{
    res.send("express app is running")
 })
 
+app.use("/api",router)
 
 const Admin = mongoose.model('Admin',{
     name:{
@@ -77,7 +80,7 @@ app.post("/upload",upload.single('product'),(req,res)=>{
      })
 })
 
-const Product = mongoose.model('Product',{
+const Product = mongoose.models.Product || mongoose.model('Product', {
     id:{
         type:Number,
         require:true,
