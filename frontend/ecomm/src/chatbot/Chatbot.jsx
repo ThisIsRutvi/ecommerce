@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React,{ useState, useRef, useEffect } from "react";
 import "./Chatbot.css";
 import { BotMessage } from "./ProductUtils";
 
@@ -71,6 +71,7 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false);
   const [chipsVisible, setChipsVisible] = useState(true);
   const messagesEndRef = useRef(null);
+  const [conversationHistory, setConversationHistory] = useState([]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -89,18 +90,14 @@ export default function Chatbot() {
       const res = await fetch(BACKEND_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg }),
+        body: JSON.stringify({ message: msg ,conversationHistory}),
       });
-      const data = await res.json();
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "bot",
-          text: data.success
-            ? data.reply
-            : "Sorry, I couldn't get a response. Please try again.",
-        },
-      ]);
+const data = await res.json();
+const replyText = data.success 
+  ? data.reply 
+  : "Sorry, I couldn't get a response. Please try again.";
+
+setMessages((prev) => [...prev, { role: "bot", text: replyText }]);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -156,7 +153,10 @@ export default function Chatbot() {
               {msg.role === "user" ? <UserIcon /> : <BotIcon />}
             </div>
             {msg.role === "bot"
-              ? <BotMessage text={msg.text} />
+              ? <div>
+    <BotMessage text={msg.text} />
+  </div>
+
               : <div className="sole-bubble user">{msg.text}</div>
             }          </div>
         ))}

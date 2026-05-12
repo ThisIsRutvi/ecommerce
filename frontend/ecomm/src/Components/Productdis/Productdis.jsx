@@ -10,6 +10,8 @@ function Productdis(props){
     const {product} = props;
     const {addToCart} = useContext(Shopcontext);
 
+        if (!product) return <div>Loading...</div>
+
       const sizes = {
       men:['6','7','8','9','10'],
       women:['5','6','7','8','9'],

@@ -89,6 +89,9 @@ const chatbotController = async (req, res) => {
 - Do NOT add any extra text like "prices may change" or "availability may vary"
 - Do NOT use your own knowledge or make up anything
 - If not found in either source say exactly: "I don't have information on that. Please contact support at support_urbansole.com or call 9845236781."
+- Do NOT number products (no "1." "2." etc)
+- Do NOT add intro text like "Here are the products from our catalog:"
+- Start DIRECTLY with the first product name
 
 PRICE FILTER RULES — follow strictly:
 - "under X" or "below X" means price LESS THAN X (do NOT include X itself)
